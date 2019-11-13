@@ -6,14 +6,15 @@ class BERTClassification(nn.Module):
     """
         A Encoder model that has on top feed-forward and softmax to classify text.
     """
-
     def __init__(self,
                  encoder,
-                 src_embed
+                 src_embed,
+                 num_classes
                  ):
         super().__init__()
         self.encoder = encoder
         self.src_embed = src_embed
+        self.estimator = nn.Linear(in_features=2, out_features=num_classes)
 
     def forward(self, src, src_mask):
         """
@@ -22,7 +23,8 @@ class BERTClassification(nn.Module):
         return self.encode(src, src_mask)
 
     def encode(self, src, src_mask):
-        return self.encoder(self.src_embed(src), src_mask)
+        net = self.encoder(self.src_embed(src), src_mask)
+        return self.estimator(net)
 
 
 class PositionwiseFeedForward(nn.Module):
