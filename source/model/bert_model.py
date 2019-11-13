@@ -20,9 +20,6 @@ class BERTClassification(nn.Module):
         """
             Take in and process masked src sequences.
         """
-        return self.encode(src, src_mask)
-
-    def encode(self, src, src_mask):
         net = self.encoder(self.src_embed(src), src_mask)
         return self.estimator(net)
 
