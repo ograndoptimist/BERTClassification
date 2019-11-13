@@ -11,6 +11,7 @@ from source.model.bert_model import PositionwiseFeedForward
 
 
 def make_model(src_vocab,
+               num_classes,
                N=6,
                d_model=512,
                d_ff=2048,
@@ -23,7 +24,8 @@ def make_model(src_vocab,
     model = \
         BERTClassification(
                             Encoder(EncoderLayer(d_model, c(attn), c(ff), dropout), N),
-                            nn.Sequential(Embeddings(d_model, src_vocab), c(position))
+                            nn.Sequential(Embeddings(d_model, src_vocab), c(position)),
+                            num_classes
         )
 
     # Initialize parameters with Glorot
