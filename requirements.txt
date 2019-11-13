@@ -1,0 +1,11 @@
+# local package
+-e .
+
+# external requirements
+torch
+pandas
+sklearn
+numpy
+unidecode
+nltk
+torchtext
