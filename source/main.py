@@ -33,10 +33,6 @@ def make_model(src_vocab,
                             num_classes
         )
 
-    # Initialize parameters with Glorot
-    for p in model.paremeters():
-        if p.dim() > 1:
-            nn.init.xavier_uniform(p)
     return model
 
 
