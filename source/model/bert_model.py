@@ -14,7 +14,14 @@ class BERTClassification(nn.Module):
         super().__init__()
         self.encoder = encoder
         self.src_embed = src_embed
-        self.estimator = nn.Linear(in_features=2, out_features=num_classes)
+        self.estimator = nn.Linear(in_features=512, out_features=num_classes)
+
+        self.init_weights()
+
+    def init_weights(self):
+        for parameter in self.parameters():
+            if parameter.dim() > 1:
+                nn.init.xavier_uniform_(parameter)
 
     def forward(self, src, src_mask):
         """
